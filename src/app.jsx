@@ -1,9 +1,29 @@
 "use strict";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Search from './searchbar.jsx';
 
-import React from 'react'
-import ReactDOM from 'react-dom'
+class App extends React.Component {
 
-ReactDOM.render(
-  <h1>THIS IS A REALLY BASIC THING!</h1>,
-  document.getElementById('app')
-)
+  constructor(props) {
+
+    super(props);
+
+    this.state = {
+      books: []
+    };
+  }
+
+  render() {
+    return (
+    <div>
+    <h1>Couch Librarian</h1>
+      <Search />
+    </div>
+
+    );
+  }
+
+};
+
+ReactDOM.render(<App />, document.getElementById('app'))
