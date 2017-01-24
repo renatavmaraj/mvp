@@ -1,14 +1,33 @@
 import React from 'react';
 
-var Search = () => {
-  return (
-    <div className="searchStyle">
-      <input  type="text" />
-      <button className="searchButton">Go!</button>
-    </div>
-    )
-  };
+class Search extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
 
-export default Search;
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name of Book:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
