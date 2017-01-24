@@ -1,6 +1,7 @@
 .searchStyle {
   margin:20px;
   text-align: center;
+  width: 100%;
 }
 
 #app {
@@ -10,3 +11,4 @@
 .h1 {
   text-align: center;
 }
+
