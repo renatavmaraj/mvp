@@ -1,7 +1,6 @@
 "use strict";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Search from './searchbar.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -10,7 +9,8 @@ class App extends React.Component {
 
     this.state = {
       value: '',
-      books: []
+      books: [],
+      currentBook: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -22,9 +22,20 @@ class App extends React.Component {
   }
 
   handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
     event.preventDefault();
+    console.log("thisstatevalue", this.state.value);
+    var arr = [];
+    var that = this;
+    this.state.books.map(function(book){
+      if(book.category === "Graphic") {
+       arr.push(book);
+       that.setState({currentBook:arr});
+        console.log("curerntBook: ", that.state.currentBook);
+      }
+    })
   }
+
+
 
   componentDidMount() {
     var myInit = {
@@ -35,20 +46,33 @@ class App extends React.Component {
       console.log("doingfetch")
       return response.json();
     }).then((data) => {
-      this.state.books = data;
-      this.setState(this.state);
+      this.setState({books:data});
     });
   }
 
   render() {
+    var that = this;
     return (
+      <div className="main">
+      <div>
+      <h1>Couch Librarian</h1>
       <form onSubmit={this.handleSubmit}>
         <label>
-          Name of Book:
+          Bottle:
           <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
+      </div>
+      <div className='recs'><ul>
+  {that.state.currentBook.map((book,i) => {
+      return (
+      <li>{book.title}</li>
+        )}
+  )}
+      </ul>
+      </div>
+      </div>
     );
   }
 
