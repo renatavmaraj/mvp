@@ -32,10 +32,13 @@ class App extends React.Component {
        that.setState({currentBook:arr});
         console.log("curerntBook: ", that.state.currentBook);
       }
+      else if(book.category === "Mystery") {
+       arr.push(book);
+       that.setState({currentBook:arr});
+        console.log("curerntBook: ", that.state.currentBook);
+      }
     })
   }
-
-
 
   componentDidMount() {
     var myInit = {
@@ -58,19 +61,18 @@ class App extends React.Component {
       <h1>Couch Librarian</h1>
       <form onSubmit={this.handleSubmit}>
         <label>
-          Bottle:
+          What Kind Of Book Do You Feel Like Reading?
           <input type="text" value={this.state.value} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
       </div>
-      <div className='recs'><ul>
+      <div className='recs'>
   {that.state.currentBook.map((book,i) => {
       return (
-      <li>{book.title}</li>
+      <div className='bookz'>{book.title} By: {book.author}</div>
         )}
   )}
-      </ul>
       </div>
       </div>
     );
